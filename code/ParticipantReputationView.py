@@ -166,7 +166,7 @@ class PrettyWidget(QMainWindow):
 
         fdata.insert(0,self.overall_data)
         self.plot_loop(fdata, self.overall_grid, self.fig_canvas_overall)
-        self.figure = matplotlib.figure.Figure(figsize=(4, 3.8))
+        self.figure = matplotlib.figure.Figure(figsize=(4, 3.6))
         self.canvas = FigureCanvas(self.figure)
         self.grid.addWidget(self.canvas, 5, 0, 1, 1)
         self.plot(self.overall_data, self.figure, self.canvas)

@@ -24,7 +24,7 @@ import PDV_TableModel
 import PDV_Controller
 
 class PrettyWidget(QMainWindow):
-    def __init__(self, fpid=103):
+    def __init__(self, fpid=303):
         super(PrettyWidget, self).__init__()
         self.initUI(fpid)
 
@@ -126,7 +126,7 @@ class PrettyWidget(QMainWindow):
         self.model = PDV_TableModel.TableModel(self.table_data, self.header)
         self.table.setModel(self.model)
         self.table.setMinimumWidth(1800)
-        self.table.setMinimumHeight(400)
+        self.table.setMinimumHeight(290)
         header = self.table.horizontalHeader()
         header.setStretchLastSection(True) 
         header.setSectionResizeMode(QHeaderView.Stretch) 

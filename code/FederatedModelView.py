@@ -91,7 +91,7 @@ class PrettyWidget(QMainWindow):
         self.model_instruction_title_label.setStyleSheet("margin: 10px; font-size: 14pt;")
         self.model_instruction_label = QLabel("Each marker on the Marginal Gain Per Round graph represents"+
             "\nthe accuracy of each round. Click on a marker to display details"+
-            "\nof the top 10 and full model of the selected round")
+            "\nof the top 10 and full model of the selected round.")
         self.model_instruction_label.setStyleSheet("margin: 10px; font-size: 10pt;")
         self.model_instruction_vbox.addWidget(self.model_instruction_title_label)
         self.model_instruction_vbox.addWidget(self.model_instruction_label)
@@ -138,7 +138,7 @@ class PrettyWidget(QMainWindow):
         self.submodel_instruction_title_label.setStyleSheet("margin: 10px; font-size: 14pt;")
         self.submodel_instruction_label = QLabel("Each square in Top 20 Model in Round X graph represents"+
             "\na submodel accuracy. Click on the square to see display"+
-            "\nsubmodel details")
+            "\nsubmodel details.")
         self.submodel_instruction_label.setStyleSheet("margin: 10px; font-size: 10pt;")
         self.submodel_instruction_vbox.addWidget(self.submodel_instruction_title_label)
         self.submodel_instruction_vbox.addWidget(self.submodel_instruction_label)
@@ -259,13 +259,26 @@ class PrettyWidget(QMainWindow):
 
     def add_submodel_to_label(self, label, data, num):
         label.clear()
-        str = "Round : {} \nModel : {}\nDate : \nParticipants : {} \nAccuracy : {}\nComment :".format(self.cur_round+1, num+1, data[0][num], data[1][num]) 
+        p_string = ""
+        first = True
+        for x in range (len(data[0][num])):
+            if(first):
+                first = False
+                p_string+=data[0][num][x]
+            else:
+                p_string+=', ' + data[0][num][x]
+                           
+        #p_string = data[0][num]
+        str = "Round : {} \nModel : {}\nDate : \nParticipants : {} \nAccuracy : {}\nComment :".format(self.cur_round+1, num+1, p_string, data[1][num]) 
         label.setText(str)
         return
 
 
     def plot1(self, fed_acc, fed_loss, contribution, participants, rounds):
         self.figure1.clf()
+
+        fed_acc = list(np.around(np.array(fed_acc),4))
+        fed_loss = list(np.around(np.array(fed_loss),4))
         
         ax1 = self.figure1.add_subplot(131)
         ax1.title.set_text('Accuracy Per Round')

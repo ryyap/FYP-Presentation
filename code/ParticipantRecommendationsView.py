@@ -101,7 +101,7 @@ class PrettyWidget(QMainWindow):
         self.from_label = QLabel("Date From:")
         self.from_label.setFixedWidth(100)
         self.from_label.setAlignment(Qt.AlignLeft)
-        date = QDate(2021, 8, 1)
+        date = QDate(2021, 7, 1)
         self.from_dateEdit = QDateEdit()
         self.from_dateEdit.setCalendarPopup(True)
         self.from_dateEdit.setDate(date)

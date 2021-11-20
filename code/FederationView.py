@@ -353,6 +353,9 @@ class PrettyWidget(QMainWindow):
         #print('plot')
         figure.clf()
 
+        acc_arr = list(np.around(np.array(acc_arr),4))
+        loss_arr = list(np.around(np.array(loss_arr),4))
+
         round_arr = []
 
         for x in range(len(acc_arr)):

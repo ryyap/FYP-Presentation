@@ -5,6 +5,8 @@ class InputDialog(QDialog):
     def __init__(self, parent):
         super(InputDialog,self).__init__(parent)
 
+        self.setWindowTitle('Add Participant')
+
         self.first = QLineEdit(self)
         self.second = QLineEdit(self)
         self.second.setText('50')
