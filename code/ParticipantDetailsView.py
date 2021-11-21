@@ -162,7 +162,7 @@ class PrettyWidget(QMainWindow):
     def date_selectionchange(self, selected):
         self.selected_date = selected
         self.table_data = self.curr_arr[selected][0]
-        self.model = ODV_TableModel.TableModel(self.table_data, self.header)
+        self.model = PDV_TableModel.TableModel(self.table_data, self.header)
         self.table.setModel(self.model)
 
         if self.fedtopic_cb.count() > 0:

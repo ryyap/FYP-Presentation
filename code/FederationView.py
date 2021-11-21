@@ -51,7 +51,7 @@ class PrettyWidget(QMainWindow):
         self.dates_arr = []
         self.selected_date = ''
 
-        self.fed_name_lbl = QLabel("Federation: {}".format('Overall'), self)
+        self.fed_name_lbl = QLabel("Federations", self)
         self.fed_name_lbl.setStyleSheet("QLabel{font-size: 18pt;}")
         self.fed_name_lbl.setAlignment(Qt.AlignTop)
         self.fed_name_lbl.setMaximumHeight(60)
@@ -63,27 +63,40 @@ class PrettyWidget(QMainWindow):
         self.grid.addWidget(self.fed_name_lbl, 0, 0, 1, 2)
         self.grid.addWidget(self.rep_button, 0, 2, 1, 1)
 
+        self.hbox1 = QHBoxLayout()
+        #self.hbox1.setFixedWidth(300)
+
 
         self.date_lbl = QLabel("Date: ", self)
         self.date_lbl.setFixedWidth(100)
 
         self.date_cb = QComboBox()
 
-        self.fedtopic_lbl = QLabel("Fed: ", self)
-        self.fedtopic_lbl.setFixedWidth(100)
+        self.hbox1.addWidget(self.date_lbl)
+        self.hbox1.addWidget(self.date_cb)
+
+        self.hbox2 = QHBoxLayout()
+
+        self.fedtopic_lbl = QLabel("Federation Topic: ", self)
+        self.fedtopic_lbl.setFixedWidth(170)
 
         self.fedtopic_cb = QComboBox()
         #print('ft',self.fedtopic_arr)
         self.fedtopic_cb.setFixedWidth(250)
+
+        self.hbox2.addWidget(self.fedtopic_lbl)
+        self.hbox2.addWidget(self.fedtopic_cb)
         
-        self.hbox.addWidget(self.date_lbl)
-        self.hbox.addWidget(self.date_cb)
-        self.hbox.addWidget(self.fedtopic_lbl)
-        self.hbox.addWidget(self.fedtopic_cb)
+        #self.hbox.addWidget(self.date_lbl)
+        #self.hbox.addWidget(self.date_cb)
+        #self.hbox.addWidget(self.fedtopic_lbl)
+        #self.hbox.addWidget(self.fedtopic_cb)
+        self.hbox.addLayout(self.hbox1)
+        self.hbox.addLayout(self.hbox2)
         self.date_lbl.setAlignment(Qt.AlignHCenter )
         self.fedtopic_lbl.setAlignment(Qt.AlignHCenter )
         self.hbox.setAlignment(Qt.AlignHCenter )
-        self.grid.addLayout(self.hbox,1, 0, 1, 3)
+        self.grid.addLayout(self.hbox,1, 0, 1, 4)
 
         dao = FV_DAO.DAO()
 
@@ -215,7 +228,10 @@ class PrettyWidget(QMainWindow):
           #label1 = QLabel("Data:")
           label2 = QLabel("Model: ", self)  
           label3 = QLabel("Date: %s" % (data[x][0][-1][5]), self)
-          label4 = QLabel("Performance: %s" % (data[x][0][-1][3]), self)
+          #////
+          #print("aaa")
+          p = float("{:.4f}".format(data[x][0][-1][3]))
+          label4 = QLabel("Performance: %s" % (p), self)
           label5 = QLabel("Contributors: %s" % (str(data[x][0][-1][6])), self)
           label6 = QLabel("Comment: ",self)
           label_box = [label1, label2, label3, label4, label5]
@@ -319,7 +335,10 @@ class PrettyWidget(QMainWindow):
           label1 = QLabel("Data: %s" % (data[0][0][0]), self)
           label2 = QLabel("Model: ", self)  
           label3 = QLabel("Date: %s" % (data[0][-1][5]), self)
-          label4 = QLabel("Performance: %s" % (data[0][-1][3]), self)
+          #///
+
+          p = float("{:.4f}".format(data[0][-1][3]))
+          label4 = QLabel("Performance: %s" % p, self)
           label5 = QLabel("Contributors: %s" % (str(data[0][-1][6])), self)
           label6 = QLabel("Comment: ",self)
           label_box = [label1, label2, label3, label4, label5]
@@ -421,6 +440,8 @@ class PrettyWidget(QMainWindow):
 
         if(x>0):
             self.load_selected_fed_data(data[x-1],x-1)
+        else:
+            self.load_overall_fed_data(data)
         #self.load_data(dates_arr[x])
         return
 
@@ -431,7 +452,8 @@ class PrettyWidget(QMainWindow):
       self.label_arr[fedtopic_index][0].setText("Data: %s" %data[i][-1][0])
       #self.label_arr[fedtopic_index][1].setText("gg")
       self.label_arr[fedtopic_index][2].setText("Date: %s" % (data[i][-1][5]))
-      self.label_arr[fedtopic_index][3].setText("Performance: %s" % (data[i][-1][3]))
+      p = float("{:.4f}".format(data[i][-1][3]))
+      self.label_arr[fedtopic_index][3].setText("Performance: %s" % (p))
       self.label_arr[fedtopic_index][4].setText("Contributors: %s" % (str(data[i][-1][6])))
 
       self.plot(acc_arr, loss_arr, self.figure_arr[fedtopic_index], self.canvas_arr[fedtopic_index])

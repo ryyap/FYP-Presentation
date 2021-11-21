@@ -273,7 +273,7 @@ class PrettyWidget(QMainWindow):
                 if button == QMessageBox.Yes:
                     print("Yes!")
                     try:
-                        with open("jj.csv", 'w', newline='') as csvfile:
+                        with open("participants.csv", 'w', newline='') as csvfile:
                             writer = csv.writer(csvfile, delimiter=',')
                             writer.writerows(np_arr)
                             msg = QMessageBox()
@@ -298,7 +298,7 @@ class PrettyWidget(QMainWindow):
 
             else:
                 try:
-                    with open("jj.csv", 'w', newline='') as csvfile:
+                    with open("participants.csv", 'w', newline='') as csvfile:
                         writer = csv.writer(csvfile, delimiter=',')
                         writer.writerows(np_arr)
                         msg = QMessageBox()
